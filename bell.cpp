@@ -23,7 +23,7 @@ struct Graph * createGraph(int V, int E) {
 void printArr(int dist[], int n) {
    printf("Vertex   Distance from Source\n");
    for (int i = 0; i < n; ++i)
-      printf("%d \t\t %d\n", i, dist[i]);
+      printf("%d \t\t %d\n", i+1, dist[i]);
 }
 void BellmanFord(struct Graph * graph, int src) {
    int V = graph -> V;
@@ -59,7 +59,7 @@ void BellmanFord(struct Graph * graph, int src) {
 int main() {
    int V = 7301;
    int E = 65053;
-   int j=-1;
+   int j=-2;
    struct Graph * graph = createGraph(V, E);
    fstream newfile;
    newfile.open("out.chess", ios:: in );
@@ -67,8 +67,7 @@ int main() {
       string tp;
       while (getline(newfile, tp)) {
          regex regex("([0-9/-]+)");
-		 cout<<tp<<j<<endl;
-		 if(j==-1){
+		 if(j<0){
 		 	j++;
 			 continue;
 			 
