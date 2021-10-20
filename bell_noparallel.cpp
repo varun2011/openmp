@@ -5,7 +5,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <omp.h>
 using namespace std;
 struct Edge {
    int src, dest, weight;
@@ -33,7 +32,6 @@ void BellmanFord(struct Graph * graph, int src) {
    for (int i = 0; i < V; i++)
       dist[i] = INT_MAX;
    dist[src] = 0;
-   #pragma omp for 
 	for(int i = 1; i <= V - 1; i++) {
 		for(int j = 0; j < E; j++) {
          int u = graph -> edge[j].src;
@@ -53,11 +51,7 @@ void BellmanFord(struct Graph * graph, int src) {
          return;
       }
    }
-	#pragma omp barrier
-	#pragma omp single
-	{
    printArr(dist, V);
-}
 
    return;
 }
@@ -99,10 +93,7 @@ int main() {
       }
       newfile.close();
    }
-#pragma omp parallel
-{
    BellmanFord(graph, 0);
-}
 	printf("Time taken: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
    return 0;
 }
