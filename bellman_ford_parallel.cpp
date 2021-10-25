@@ -35,6 +35,7 @@ void BellmanFordinitialization(struct Graph *graph, int src)
 
    int V = graph->V;
    int E = graph->E;
+#pragma omp for
    for (int i = 0; i < V; i++)
       dist[i] = INT_MAX;
    dist[src] = 0;
